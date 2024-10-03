@@ -236,7 +236,6 @@
       <h2 class="title is-3">Interleaved Scene Graph: The Evaluation Framework</h2>
       <div class="content has-text-justified">
         <img src="img/ISG.png" width="100%" alt="ISG-Overview" class="responsive-image">
-        <md-block> 
           We introduce Interleaved Scene Graph (ISG), a multi-granular, automatic evaluation framework for interleaved text-and-image generation, 
           which assesses responses across four levels, detailed as follows:
           <ol>
@@ -256,7 +255,6 @@
               "Analyze-then-Judge" Chain-of-Thought process. The result is a more human-aligned evaluation that assesses generation quality, 
               text-image alignment, and overall helpfulness, producing a comprehensive score.</li>
           </ol>
-        </md-block>
       </div>
       <!--/ Environment Infrastructure. -->
     </div>
@@ -268,7 +266,6 @@
       <h2 class="title is-3">ISG-Bench: The Benchmark</h2>
       <div class="content has-text-justified">
         <img src="img/ISG-Bench-2.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
-        <md-block> 
           ISG-BENCH is our benchmark for interleaved text-and-image generation, 
           featuring 1,150 samples across 21 subtasks in 8 scenarios. It evaluates multimodal understanding, generation, 
           and instruction-following. All queries are vision-language dependent, with golden reference answers. 
@@ -285,7 +282,6 @@
               from concrete referential outputs to creative tasks without strict guidelines, with evaluation conducted using multimodal 
               DSG to accurately assess these varied image generation requirements across different task types.</li>
           </ol>
-        </md-block>
       </div>
       <!--/ Environment Infrastructure. -->
     </div>
@@ -297,7 +293,6 @@
       <h2 class="title is-3">ISG-Agent: The Agent Framework</h2>
       <div class="content has-text-justified">
         <img src="img/ISG-Bench-2.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
-        <md-block> 
           ISG-AGENT, our pioneering framework for interleaved text-and-image generation, 
           addresses the challenges faced by unified generation models through a three-component system: 
           (1) Planning, which interprets multimodal queries and generates tool usage plans; 
@@ -305,7 +300,6 @@
           (3) Refinement, which reviews and enhances generated content by addressing errors and improving coherence. 
           This <i>"Plan-Execute-Refine"</i> pipeline ensures outputs that closely adhere to user instructions while autonomously handling diverse tasks, 
           leveraging multimodal language models and specialized tools to create cohesive, text-image-aligned content that goes beyond discrete blocks.
-        </md-block>
       </div>
       <!--/ Environment Infrastructure. -->
     </div>
@@ -315,7 +309,6 @@
     <div class="container is-max-desktop">
 
       <h2 class="title is-3">Benchmark</h2>
-      <md-block>
         We leverage GPT-4o for question generation and VQA in the ISG framework. 
         Performance is evaluated against human-annotated ground truth with cross-validation, 
         using varied sample sizes and metrics. Question generation is deemed correct based on 
@@ -323,7 +316,6 @@
         framework with "1-10" scoring and "Yes-or-No" options. Ablation studies examine vision inputs 
         versus caption images and few-shot prompting. 
         MLLM-as-a-Judge evaluation uses human agreement as the metric.
-      </md-block>
     </div>
     <div class="cover" id="contentCover">
       <!-- Baseline. -->
