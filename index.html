@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="GUI-World: A Dataset for GUI-Oriented Multimodal LLM-based Agents">
-  <meta name="keywords" content="GUI, Video, Dataset, Human Computer Interaction, LLM-based Agent">
+  <meta name="description" content="Interleaved Scene Graph for Interleaved Text-and-Image Generation Assessment">
+  <meta name="keywords" content="Interleaved Text-and-Image Generation, Generative Models, Multimodal Large Language Model, Scene Graphs, Automatic Evaluation, Benchmark">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GUI-World: A Dataset for GUI-Oriented Multimodal LLM-based Agents</title>
+  <title>Interleaved Scene Graph for Interleaved Text-and-Image Generation Assessment</title>
   <script type="module" src="https://md-block.verou.me/md-block.js"></script>
 
 
@@ -72,20 +72,26 @@
             More Research
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://trustllmbenchmark.github.io/TrustLLM-Website/">
-              TrustLLM
-            </a>
             <a class="navbar-item" href="https://mllm-judge.github.io">
-              MLLM-as-a-Judge
+              MLLM-as-a-Judge (ICML 2024 Oral)
             </a>
-            <a class="navbar-item" href="https://unigen-framework.github.io/">
-              UniGen
-            </a>
-            <a class="navbar-item" href="https://github.com/Flossiee/HonestyLLM">
-              HonestyLLM
+            <a class="navbar-item" href="https://trustllmbenchmark.github.io/TrustLLM-Website/">
+              TrustLLM (ICML 2024)
             </a>
             <a class="navbar-item" href="https://llm-coauthor.github.io/">
-              LLM-as-a-Coauthor
+              LLM-as-a-Coauthor (NAACL 2024)
+            </a>
+            <a class="navbar-item" href="https://github.com/Flossiee/HonestyLLM">
+              HonestyLLM (NeurIPS 2024)
+            </a>
+            <a class="navbar-item" href="https://gui-world.github.io/">
+              GUI-World
+            </a>
+            <a class="navbar-item" href="https://unigen-framework.github.io/">
+              DataGen
+            </a>
+            <a class="navbar-item" href="https://obscureprompt.github.io/">
+              ObscurePrompt
             </a>
           </div>
         </div>
@@ -101,60 +107,40 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">
-              GUI-World: A Dataset for GUI-Oriented Multimodal Large Language Models
+              Interleaved Scene Graph for Interleaved Text-and-Image Generation Assessment
             </h1>
             <div class="is-size-5 publication-authors">
-              <span class="author-block"><a href="https://dongping-chen.github.io/">Dongping
-                  Chen</a><sup style="color:#ec8bfd;">1</sup><sup style="color:#ff2b67;">*</sup><sup style="color:#c9892e;">†</sup>,</span>
-              <span class="author-block"><a href="https://howiehwong.github.io/">Yue Huang</a><sup style="color:#2bff32;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
-              <span class="author-block"><a href="https://siyuan-5.github.io/">Siyuan Wu<a></a><sup style="color:#ec8bfd;">1</sup><sup style="color:#ff2b67;">*</sup>,</span>
-              <span class="author-block"><a href="https://jingyuhhh.github.io/">Jingyu Tang</a><sup style="color:#ec8bfd;">1</sup><sup style="color:#ff2b67;">*</sup>,</span>
-              <span class="author-block">Liuyi Chen<sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block">Yilin Bai<sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block">Zhigang He<sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block">Chenlong Wang<sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block"><a href="https://huichizhou.github.io/">Huichi Zhou</a><sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block">Yiqiang Li<sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block">Tianshuo Zhou<sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block">Yue Yu<sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block"><a href="https://flossiee.github.io/">Chujie Gao</a><sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block"><a href="https://mask-hui.github.io/">Qihui Zhang</a><sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block">Yi Gui<sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block">Zhen Li<sup style="color:#ec8bfd;">1</sup>,</span>
-
-              <span class="author-block"><a href="http://wanyao.me/"><b>Yao Wan</b></a><sup style="color:#ec8bfd;">1</sup><sup style="color:#c9892e;">†</sup>,</span>
+              <span class="author-block"><a href="https://dongping-chen.github.io/">Dongping Chen
+                  </a><sup style="color:#ec8bfd;">1</sup><sup style="color:#2bff32;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block"><a href="https://dipsy0830.github.io/">Ruoxi Chen
+                </a><sup style="color:#2bff32;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block"><a href="https://urrealhero.github.io/">Shu Pu
+                </a><sup style="color:#2bff32;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block">Zhaoyi Liu<sup style="color:#2bff32;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block">Yanru Wu<sup style="color:#2bff32;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block">Caixi Chen<sup style="color:#2bff32;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block"><a href="https://howiehwong.github.io/">Benlin Liu</a><sup style="color:#2bff32;">1</sup>,</span>
+              <span class="author-block"><a href="https://howiehwong.github.io/">Yue Huang</a><sup style="color:#fabb55;">3</sup>,</span>
+              <span class="author-block"><a href="http://wanyao.me/"><b>Yao Wan</b></a><sup style="color:#2bff32;">2</sup>,</span>
               <span class="author-block"><a href="https://scholar.google.com/citations?user=cTpFPJgAAAAJ&hl=en"><b>Pan
-                  Zhou</b></a><sup style="color:#ec8bfd;">1</sup>,</span>
-              <span class="author-block"><a href="https://scholar.google.com/citations?user=CQ1cqKkAAAAJ&hl=en"><b>Jianfeng
-                  Gao</b></a><sup style="color:#fabb55;">3</sup>,</span>
-              <span class="author-block"><a href="https://lichao-sun.github.io/"><b>Lichao Sun</b></a><sup style="color:#66f1fb;">4</sup></span>
+                  Zhou</b></a><sup style="color:#2bff32;">2</sup>,</span>
+              <span class="author-block"><a href="https://www.ranjaykrishna.com/index.html"><b>Ranjay Krishna</b></a><sup style="color:#ec8bfd;">1</sup><sup style="color:#c9892e;">†</sup>,</span>
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block"><sup style="color:#ec8bfd;">1</sup>Huazhong University of Science and Technology,</span>
-              <br>
-              <span class="author-block"><sup style="color:#2bff32;">2</sup>University of Notre Dame,</span>
-              <span class="author-block"><sup style="color:#fabb55;">3</sup>Microsoft Research,</span>
-              <span class="author-block"><sup style="color:#66f1fb;">4</sup>Lehigh University</span>
+              <span class="author-block"><sup style="color:#ec8bfd;">1</sup>University of Washington,</span>
+              <span class="author-block"><sup style="color:#2bff32;">2</sup>Huazhong University of Science and Technology,</span>
+              <span class="author-block"><sup style="color:#fabb55;">3</sup>University of Notre Dame</span>
             </div>
 
             <div class="is-size-5 publication-authors">
-              <span class="author-block">{<a href="mailto:dongpingchen0612@gmail.com">dongpingchen0612</a>, <a
-                  href="mailto:yaowan1992@gmail.com">yaowan1992</a>}@gmail.com</span>
+              <span class="author-block"><a href="mailto:cdp0612@uw.edu">cdp0612@uw.edu</a>, 
+                <a href="mailto:ranjay@cs.washington.edu">ranjay@cs.washington.edu</a></span>
             </div>
 
 
             <div class="column has-text-centered">
               <div class="publication-links">
-                <!-- PDF Link. -->
-                <!--                <span class="link-block">-->
-                <!--                  <a href="https://arxiv.org/pdf/2011.12948" class="external-link button is-normal is-rounded is-dark">-->
-                <!--                    <span class="icon">-->
-                <!--                      <i class="fas fa-file-pdf"></i>-->
-                <!--                    </span>-->
-                <!--                    <span>Paper</span>-->
-                <!--                  </a>-->
-                <!--                </span>-->
                 <span class="link-block">
                   <a href="https://arxiv.org/abs/2406.10819" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -163,19 +149,8 @@
                     <span>Paper</span>
                   </a>
                 </span>
-                <!-- Video Link. -->
-                <!--                <span class="link-block">-->
-                <!--                  <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"-->
-                <!--                    class="external-link button is-normal is-rounded is-dark">-->
-                <!--                    <span class="icon">-->
-                <!--                      <i class="fab fa-youtube"></i>-->
-                <!--                    </span>-->
-                <!--                    <span>Video</span>-->
-                <!--                  </a>-->
-                <!--                </span>-->
-                <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="https://github.com/Dongping-Chen/GUI-World"
+                  <a href="https://github.com/Dongping-Chen/ISG"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
@@ -184,7 +159,7 @@
                   </a>
                 </span>
                 <!-- Dataset Link. -->
-                <span class="link-block">
+                {% comment %} <span class="link-block">
                   <a href="https://huggingface.co/datasets/shuaishuaicdp/GUI-World"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -192,9 +167,9 @@
                     </span>
                     <span>Data</span>
                   </a>
-                </span>
+                </span> {% endcomment %}
                 <!-- Data Viewer. -->
-                <span class="link-block">
+                {% comment %} <span class="link-block">
                   <a href="https://huggingface.co/shuaishuaicdp/GUI-Vid" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -202,7 +177,7 @@
                     </span>
                     <span>Model</span>
                   </a>
-                </span>
+                </span> {% endcomment %}
                 <!-- Slides Link. -->
                 <!-- <span class="link-block">
                   <a href="https://docs.google.com/presentation/d/1-r889Nb9n7SeZqrj-ryNqJLoMzp7aGNU2ihO8nUdEcE/edit?usp=sharing"
@@ -256,25 +231,19 @@
       <!-- Main Figure. -->
       <h2 class="title is-3"></h2>
       <div class="content has-text-justified">
-        <img src="img/GUI_overview.png" width="100%" alt="GUI-world Overview" class="responsive-image">
-        <img src="img/radar.jpg" width="100%" alt="GUI-world Benchmark Overview" class="responsive-image">
+        <img src="img/ISG-Bench.png" width="100%" alt="ISG-Bench Overview" class="responsive-image">
+        <img src="img/intro-for-interleaved-gen.png" width="100%" alt="intro-for-interleaved-gen" class="responsive-image">
         <md-block>
-          In this work, we introduce a comprehensive GUI-oriented dataset, GUI-World, to benchmark and enhance
-          GUI understanding capabilities. Specifically, there are three-fold major contributions:
+          In this work, we introduce a multi-granular automatic evaluation framework for accurate interleaved text-and-image generation, pairing with
+          the first multimodal interleaved benchmark <b>ISG-Bench</b> and a compositional agent framework <b>ISG-Agent</b>:
           <ol>
-            <li><b>A Dataset.</b> We propose GUI-WORLD, a comprehensive GUI dataset comprising over 12,000 videos
-              specifically designed to assess and improve the GUI understanding capabilities of MLLMs, spanning a
-              range of categories and scenarios, including desktop, mobile, and extended reality (XR), and
-              representing the first GUI-oriented instruction-tuning dataset in the video domain. </li>
-            <li><b>A Novel Model.</b> Based on <b>GUI-WORLD</b>, we propose <b>GUI-Vid</b>, a GUI-oriented
-              VideoLLM with enhanced capabilities to handle various and complex GUI tasks. <b>GUI-Vid</b> shows a
-              significant improvement on the benchmark and achieves results comparable to the top-performing
-              models </li>
-            <li><b>Comprehensive Experiments and Valuable Insights.</b> Our experiments indicate that most
-              existing MLLMs continue to face challenges with GUI-oriented tasks, particularly in sequential and
-              dynamic GUI content. Empirical findings suggest that improvements in vision perception, along with
-              an increase in the number of keyframes and higher resolution, can boost performance in GUI-oriented
-              tasks, thereby paving the way for the future of GUI agents.</li>
+            <li><b>An Automatic Evaluation Framework.</b> We propose an automatic evaluation framework, <b>Interleaved Scene Graph (ISG)</b>, 
+              that assesses interleaved text-and-image generation across four levels—holistic, structure, block, and image—for a comprehensive assessment. </li>
+            <li><b>A New Benchmark.</b> We introduce <b>ISG-Bench</b>, the first benchmark for accurate interleaved generation tasks, 
+              encompassing 21 categories and 1,150 samples, each integrating language-vision dependencies with corresponding golden answers.</li>
+            <li><b>An Interleaved Generative Agent.</b> We introduce <b>ISG-Agent</b>, a unified agent with integrated tool execution, designed to explore the upper bounds of interleaved generation tasks.</li>
+            <li><b>Extensive Evaluation and Implications.</b> We conduct extensive experiments to evaluate current interleaved text-and-image generation models and frameworks, 
+              including our proposed <b>ISG-Agent</b>, providing valuable insights for future research.
           </ol>
         </md-block>
       </div>
@@ -290,24 +259,20 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <md-block>
-              Recently, Multimodal Large Language Models (MLLMs) have been used as agents to control keyboard and mouse
-              inputs by directly perceiving the Graphical User Interface (GUI) and generating corresponding code.
-              However, current agents primarily exhibit excellent understanding capabilities in static environments and
-              are predominantly applied in relatively simple domains, such as Web or mobile interfaces. We argue that a
-              robust GUI agent should be capable of perceiving temporal information on the GUI, including dynamic Web
-              content and multi-step tasks. Additionally, it should possess a comprehensive understanding of various GUI
-              scenarios, including desktop software and multi-window interactions.
-              To this end, this paper introduces a new dataset, termed GUI-World, which features meticulously crafted
-              Human-MLLM annotations, extensively covering six GUI scenarios and eight types of GUI-oriented questions
-              in three formats.
-              We evaluate the capabilities of current state-of-the-art MLLMs, including ImageLLMs and VideoLLMs, in
-              understanding various types of GUI content, especially dynamic and sequential content. Our findings reveal
-              that ImageLLMs struggle with dynamic GUI content without manually annotated keyframes or operation
-              history. On the other hand, VideoLLMs fall short in all GUI-oriented tasks given the sparse GUI video
-              dataset. Based on GUI-World, we take the initial step of leveraging a fine-tuned VideoLLM as a GUI agent,
-              demonstrating an improved understanding of various GUI tasks. However, due to the limitations in the
-              performance of base LLMs, we conclude that using VideoLLMs as GUI agents remains a significant challenge.
-              We believe our work provides valuable insights for future research in dynamic GUI content understanding.
+              Unified Transformer-based models have enabled simultaneous multimodal understanding and generation, 
+              showing promise in unifying both vision and language tasks with interleaved text-and-image generation. 
+              However, assessing the performance of multimodal interleaved generation remains unexplored and challenging 
+              due to the complexity of interleaved content. In this paper, we design an automatic multi-granular evaluation 
+              framework INTERLEAVED SCENE GRAPH (ISG) with four levels to evaluate accurate interleaved generation tasks, 
+              which converts multimodal queries into atomic questions, then perform visual question answering for precise verification. 
+              Moreover, we propose ISG-BENCH, the first multimodal interleaved benchmark with concrete generation requirement consisting of 
+              1,150 samples across 21 text-image generation tasks. Additionally, we pioneer in a compositional agent framework ISG-AGENT to 
+              explore the upper bound of interleaved generation with agent workflow. In our experiments, we conduct a multi-granular evaluation 
+              of ISG, demonstrating its potential for automatically evaluating interleaved generation consistent with ground truth and human preferences. 
+              Furthermore, comprehensive assessments of 10 interleaved generative frameworks reveal that unified models still lack basic accurate 
+              instruction-following capabilities, falling short even in structural requirements. Additionally, our ISG-AGENT outperforms other 
+              compositional frameworks in interleaved generation at various levels but still struggles with vision-dominated tasks. Our work offers 
+              valuable insights for advancing future research in interleaved text-and-image generation.
             </md-block>
           </div>
         </div>
@@ -1631,12 +1596,7 @@
     <div class="container is-max-desktop content">
       <h1 class="supportTitle">Acknowledgement</h1>
       <md-block>
-        Many thanks to Yinuo Liu, Zhengyan Fu, Shilin Zhang, Yu, Tianhe Gu, Haokuan Yuan, and Junqi Wang for their
-        invalueble effort in this project.
-        This project is based on methodologies and code presented in
-        [Videochat2](https://github.com/OpenGVLab/Ask-Anything).
-        This website is based on templates in [TrustLLM](https://trustllmbenchmark.github.io/TrustLLM-Website/) and
-        [OSWorld](https://os-world.github.io/).
+        Many thanks to [Jieyu Zhang](https://jieyuz2.github.io/) for his invalueble effort in this project.
       </md-block>
     </div>
   </section>
@@ -1657,12 +1617,9 @@
       <br>
 
       <div id="logoContainer">
-        <img src="img/logos/HUST.png" alt="School 1" class="schoolLogo">
-        <img src="img/logos/Lehigh-University-logo.png" alt="School 2" class="schoolLogo">
+        <img src="img/logos/UW.png" alt="School 1" class="schoolLogo">
+        <img src="img/logos/HUST.png" alt="School 2" class="schoolLogo">
         <img src="img/logos/ND.png" alt="School 3" class="schoolLogo">
-        <!-- <img src="img/logos/ND.png" alt="School 3" class="schoolLogo"> -->
-        <img src="img/logos/Microsoft.png" alt="School 4" class="schoolLogo">
-
       </div>
 
 
