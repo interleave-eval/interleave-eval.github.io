@@ -212,14 +212,14 @@
               showing promise in unifying both vision and language tasks with interleaved text-and-image generation. 
               However, assessing the performance of multimodal interleaved generation remains unexplored and challenging 
               due to the complexity of interleaved content. In this paper, we design an automatic multi-granular evaluation 
-              framework INTERLEAVED SCENE GRAPH (ISG) with four levels to evaluate accurate interleaved generation tasks, 
+              framework Interleaved Scene Graph (ISG) with four levels to evaluate accurate interleaved generation tasks, 
               which converts multimodal queries into atomic questions, then perform visual question answering for precise verification. 
-              Moreover, we propose ISG-BENCH, the first multimodal interleaved benchmark with concrete generation requirement consisting of 
-              1,150 samples across 21 text-image generation tasks. Additionally, we pioneer in a compositional agent framework ISG-AGENT to 
+              Moreover, we propose ISG-Bench, the first multimodal interleaved benchmark with concrete generation requirement consisting of 
+              1,150 samples across 21 text-image generation tasks. Additionally, we pioneer in a compositional agent framework ISG-Agent to 
               explore the upper bound of interleaved generation with agent workflow. In our experiments, we conduct a multi-granular evaluation 
               of ISG, demonstrating its potential for automatically evaluating interleaved generation consistent with ground truth and human preferences. 
               Furthermore, comprehensive assessments of 10 interleaved generative frameworks reveal that unified models still lack basic accurate 
-              instruction-following capabilities, falling short even in structural requirements. Additionally, our ISG-AGENT outperforms other 
+              instruction-following capabilities, falling short even in structural requirements. Additionally, our ISG-Agent outperforms other 
               compositional frameworks in interleaved generation at various levels but still struggles with vision-dominated tasks. Our work offers 
               valuable insights for advancing future research in interleaved text-and-image generation.
             </md-block>
@@ -505,7 +505,7 @@
                   <!-- <div class="content has-text-justified"> -->
                   <md-block>
                     Ablation study on vision input and few-shot helps tuple construction in both block-level
-and image-level. For language-dominate tasks, we do not require accurate image generation.
+                    and image-level. For language-dominate tasks, we do not require accurate image generation.
                   </md-block>
                   <!-- </div> -->
 
@@ -658,14 +658,13 @@ and image-level. For language-dominate tasks, we do not require accurate image g
       <h2 class="title is-3">Benchmarking Interleaved Text-and-Image Generation</h2>
       <div class="content has-text-justified">
         <img src="img/ISG-Bench-Radar.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
-        <md-block> 
           We evaluate 10 frameworks capable of generating interleaved text-and-image
           content, four recently released unified models, Show-o, Anole, Minigpt-5, CoMM-Minigpt-5 , SEED-LLaMA as well as two compositional settings, using Gemini-1.5-Pro (GeminiTeam, 2023)
           and Claude-3.5-Sonnet as a multimodal preceptor2
           and SD3 as its generator, with SD2.1 for ablation study. For our ISG-AGENT, we
           use GPT-4o for planning and verification agent, and use Claude-3.5-Sonnet for tool selector, with
           SD3 as image generator and multiple tools (UltraEdit, DynamiCrafter, SV3D, DreamMover).
-        </md-block>
+
         <img src="img/case-study.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
       </div>
       <!--/ Environment Infrastructure. -->
