@@ -119,7 +119,7 @@
               <span class="author-block">Zhaoyi Liu<sup style="color:#008f4c;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
               <span class="author-block">Yanru Wu<sup style="color:#008f4c;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
               <span class="author-block">Caixi Chen<sup style="color:#008f4c;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
-              <span class="author-block"><a href="https://howiehwong.github.io/">Benlin Liu</a><sup style="color:#008f4c;">1</sup>,</span>
+              <span class="author-block"><a href="https://howiehwong.github.io/">Benlin Liu</a><sup style="color:#ec8bfd;">1</sup>,</span>
               <span class="author-block"><a href="https://howiehwong.github.io/">Yue Huang</a><sup style="color:#fabb55;">3</sup>,</span>
               <span class="author-block"><a href="http://wanyao.me/"><b>Yao Wan</b></a><sup style="color:#008f4c;">2</sup>,</span>
               <span class="author-block"><a href="https://scholar.google.com/citations?user=cTpFPJgAAAAJ&hl=en"><b>Pan
@@ -183,7 +183,7 @@
         <img src="img/ISG-Bench.png" width="100%" alt="ISG-Bench Overview" class="responsive-image">
         <img src="img/intro-for-interleaved-gen.png" width="100%" alt="intro-for-interleaved-gen" class="responsive-image">
         <md-block>
-          In this work, we introduce a multi-granular automatic evaluation framework for accurate interleaved text-and-image generation, pairing with
+          In this work, we explore recently released unified models in their interleaved generation capabilities. We introduce a multi-granular automatic evaluation framework for accurate interleaved text-and-image generation, pairing with
           the first multimodal interleaved benchmark <b>ISG-Bench</b> and a compositional agent framework <b>ISG-Agent</b>:
           <ol>
             <li><b>An Automatic Evaluation Framework.</b> We propose an automatic evaluation framework, <b>Interleaved Scene Graph (ISG)</b>, 
@@ -233,28 +233,28 @@
   <section class="section">
     <div class="container is-max-desktop">
       <!-- Environment Infrastructure. -->
-      <h2 class="title is-3">GUI-World Dataset Construction</h2>
+      <h2 class="title is-3">Interleaved Scene Graph: The Evaluation Framework</h2>
       <div class="content has-text-justified">
-        <img src="img/dataset-pipeline.png" width="100%" alt="environment infrastructure" class="responsive-image">
-        <md-block>We introduce **GUI-World**, a comprehensive dataset covering six GUI scenarios including video,
-          human-annotated keyframes, as well as detailed captions and diverse types of QA produced by our data curation
-          framework, aiming at benchmarking and enhancing the general GUI-oriented capabilities. These GUI scenarios
-          encompass desktop operating systems (<em>e.g.</em>, macOS, Windows) and mobile platforms (<em>e.g.</em>,
-          Android and iOS), websites, software, and even extended-range technologies (XR) (<em>e.g.</em>, GUI in Apple
-          Vision Pro). Discussion for each scenario are in <b>Six Main GUI Categories</b>.
-          The construction of the **GUI-World** dataset mainly follows a two-stage process:
+        <img src="img/ISG.png" width="100%" alt="ISG-Overview" class="responsive-image">
+        <md-block> 
+          We introduce Interleaved Scene Graph (ISG), a multi-granular, automatic evaluation framework for interleaved text-and-image generation, 
+          which assesses responses across four levels, detailed as follows:
           <ol>
-            <li><b>GUI Video Collection and Image Sequence Process</b>: During this phase, a group of 24 undergraduate
-              and graduate students manually collects GUI-related videos from YouTube or manual screen recording.
-              Subsequently, these students use video editing software to transform the videos into short video clips,
-              each containing various human operations on GUI content, and then annotate them with detailed operational
-              descriptions.</li>
-            <li><b>Diversify Types of QA through MLLM-Human Collaboration</b>: Given that human annotations might
-              contain grammar errors or unclear statements, we utilize the MLLM, specifically GPT-4V, to first refine
-              the descriptions of the image sequences and then generate various types of QA focusing on static and
-              dynamic GUI content, aiming at comprehensively tasking MLLMs with their GUI-oriented abilities. Finally,
-              all MLLM-generated content will be carefully reviewed through human verification to ensure alignment with
-              original human aims.</li>
+            <li><b>Structure:</b> Our method uses a language model to predict the structure of interleaved multimedia outputs based on mixed image-text inputs. 
+              We then evaluate if generated answers match these predicted structural requirements.</li>
+            <li><b>Block:</b> We assess block-level relations in interleaved content by converting queries into atomic block-to-block questions, 
+              which are then evaluated using visual question answering (VQA) techniques. 
+              This process involves representing prompts as subject-object-relation tuples and generating questions from these tuples, 
+              which a multimodal language model evaluates by providing yes/no answers and numerical scores. </li>
+            <li><b>Image:</b> We evaluate image-level interleaved generation by transforming multimodal queries into dependency-aware tuples of entities, 
+              relations, and attributes, linked to specific generated images. 
+              This approach is particularly useful for vision-dominant tasks like style transfer. 
+              We then use a language model to generate dependent questions, which are evaluated via a 
+              visual question answering module to assess image generation quality.</li>
+            <li><b>Holistic:</b> Our holistic evaluation uses a multimodal language model as a judge, inputting the query, 
+              response, and human-annotated golden answer. This approach, which builds on previous methods, incorporates an 
+              "Analyze-then-Judge" Chain-of-Thought process. The result is a more human-aligned evaluation that assesses generation quality, 
+              text-image alignment, and overall helpfulness, producing a comprehensive score.</li>
           </ol>
         </md-block>
       </div>
@@ -264,301 +264,50 @@
 
   <section class="section">
     <div class="container is-max-desktop">
-      <!-- Data Statistics. -->
-      <h2 class="title is-3">Data Statistics and Comparison</h2>
-      <md-block>
-        Below we present an overview of the main statistics of **GUI-World**, showcasing the outline and a broad spectrum
-        of tasks. **GUI-World** contains a total of 12k videos and 100k queries.
-        We make a comparison of **GUI-World** against some other different benchmarks or dataset in GUI domain as
-        presented below. </md-block>
-      <div class="column is-full-width interpolation-panel">
-        <div class="columns">
-          <div class="column is-one-third">
-            <table class="table is-hoverable is-striped" style="margin: 0 auto; background-color: rgba(0,0,0,0)">
-              <tr>
-                <th style="border: 0">&nbsp;</th>
-                <th style="vertical-align: middle" rowspan="1">GUI-WORLD</th>
-              </tr>
-
-              <tr>
-
-                <td style="font-weight: bold">Instances</td>
-                <td style="text-align: center;">12,379</td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">Sem.</td>
-                <td style="text-align: center;">Both</td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">VL</td>
-                <td style="text-align: center;"><span
-                    class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">✔️</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">Video</td>
-                <td style="text-align: center;"><span
-                    class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">✔️</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">Web</td>
-                <td style="text-align: center;"><span
-                    class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">✔️</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">Mob.</td>
-                <td style="text-align: center;">
-                  ✔️
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">Desk.</td>
-                <td style="text-align: center;">
-                  ✔️
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">XR</td>
-                <td style="text-align: center;">
-                  ✔️
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">Sequential</td>
-                <td style="text-align: center;">
-                  ✔️
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">CrossApp</td>
-                <td style="text-align: center;">
-                  ✔️
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">Dynamic</td>
-                <td style="text-align: center;">
-                  ✔️
-                </td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold">Detailed Tasks</td>
-                <td style="text-align: center;">
-                  GUI Understanding Instruction Following
-                </td>
-              </tr>
-            </table>
-
-          </div>
-          <div class="column is-two-thirds">
-            <div class="table-container">
-              <div class="columns">
-                <div class="column">
-                  <table class="table is-hoverable is-striped"
-                    style="margin: 0 auto; background-color: rgba(0,0,0,0); width:600px; text-align: center;">
-                    <!-- <thead> -->
-                    <tr>
-                      <th style="width: 33%"><a href="https://github.com/SkyworkAI/agent-studio"
-                          target="_blank">AgentStudio</a></th>
-                      <th style="width: 33%"><a href="https://os-world.github.io/" target="_blank">OSWorld</a>
-                      </th>
-                      <th style="width: 33%"><a href="https://arxiv.org/abs/2211.07615" target="_blank">UGIF</a>
-                      </th>
-                      <th style="width: 33%"><a
-                          href="https://github.com/google-research/google-research/tree/master/android_in_the_wild"
-                          target="_blank">AitW</a></th>
-                      <th style="width: 33%"><a href="https://osu-nlp-group.github.io/Mind2Web/"
-                          target="_blank">Mind2Web</a></th>
-                      <th style="width: 33%"><a href="http://www.interactionmining.org/rico.html"
-                          target="_blank">Rico</a></th>
-                      <th style="width: 33%"><a href="https://github.com/apple/ml-ferret" target="_blank">FerretUI</a>
-                      </th>
-                      <th style="width: 33%"><a href="https://webarena.dev/" target="_blank">WebArena</a></th>
-                      <th style="width: 33%"><a href="https://x-lance.github.io/META-GUI-Leaderboard/"
-                          target="_blank">MetaGUI</a></th>
-                      <th style="width: 33%"><a href="https://miniwob.farama.org/" target="_blank">MiniWoB++</a>
-                      </th>
-                      <th style="width: 33%"><a href="https://huggingface.co/datasets/Writer/omniact"
-                          target="_blank">OmniAct</a></th>
-                      <th style="width: 33%"><a href="https://mmina.cliangyu.com/" target="_blank">MMINA</a></th>
-                    </tr>
-                    <tr>
-                      <td>304</td>
-                      <td>369</td>
-                      <td>523</td>
-                      <td>715,142</td>
-                      <td>2,350</td>
-                      <td>72,219</td>
-                      <td>123,702</td>
-                      <td>812</td>
-                      <td>1,125</td>
-                      <td>100</td>
-                      <td>9,802</td>
-                      <td>1,050</td>
-                    </tr>
-                    <tr>
-                      <td>High</td>
-                      <td>High</td>
-                      <td>High</td>
-                      <td>High</td>
-                      <td>Both</td>
-                      <td>Low</td>
-                      <td>Low</td>
-                      <td>Low</td>
-                      <td>Low</td>
-                      <td>Low</td>
-                      <td>Low</td>
-                      <td>Low</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">✔️</td>
-                      <td data-title="Open-Weight">✔️</td>
-                    </tr>
-                    <tr>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                      <td data-title="Open-Weight">❌</td>
-                    </tr>
-                    <tr>
-                      <td>General Control</td>
-                      <td>General Control</td>
-                      <td>UI Grounded Instruction Following</td>
-                      <td>GUI Understanding</td>
-                      <td>Web Navigation</td>
-                      <td>UI Code/Layout Generation</td>
-                      <td>UI Grounding & Understanding</td>
-                      <td>Web Navigation</td>
-                      <td>Mobile Navigation</td>
-                      <td>Web Navigation</td>
-                      <td>Code Generation</td>
-                      <td>Web Navigation</td>
-                    </tr>
-                  </table>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- Environment Infrastructure. -->
+      <h2 class="title is-3">ISG-Bench: The Benchmark</h2>
+      <div class="content has-text-justified">
+        <img src="img/ISG-Bench-2.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
+        <md-block> 
+          ISG-BENCH is our benchmark for interleaved text-and-image generation, 
+          featuring 1,150 samples across 21 subtasks in 8 scenarios. It evaluates multimodal understanding, generation, 
+          and instruction-following. All queries are vision-language dependent, with golden reference answers. 
+          Samples were carefully curated using cross-validation and similarity filtering.
+          <ol>
+            <li><b>Data Collection and Quality Control:</b> Our benchmark collection process integrates high-quality visual metadata from existing datasets and our own collections, 
+              with curated natural language queries referencing these images and specifying output structures, 
+              while leveraging MLLMs for initial answer generation and human annotators for refinement and creation of free-form queries and
+               golden answers to prevent data contamination, ultimately yielding a diverse, high-quality interleaved  
+               benchmark validated through cross-annotation for consistency and accuracy.</li>
+            <li><b>Other Dimensions:</b>Our ISG-BENCH categorization extends beyond task definitions to include two additional dimensions: 
+              Modality Domination, which classifies tasks based on their primary output modality (Vision, Language, or Both), 
+              and Accurate Image Generation, which assesses the specificity of image generation requirements in answers, ranging 
+              from concrete referential outputs to creative tasks without strict guidelines, with evaluation conducted using multimodal 
+              DSG to accurately assess these varied image generation requirements across different task types.</li>
+          </ol>
+        </md-block>
       </div>
-      <!--/ Data Statistics. -->
+      <!--/ Environment Infrastructure. -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Environment Infrastructure. -->
+      <h2 class="title is-3">ISG-Agent: The Agent Framework</h2>
+      <div class="content has-text-justified">
+        <img src="img/ISG-Bench-2.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
+        <md-block> 
+          ISG-AGENT, our pioneering framework for interleaved text-and-image generation, 
+          addresses the challenges faced by unified generation models through a three-component system: 
+          (1) Planning, which interprets multimodal queries and generates tool usage plans; 
+          (2) Tool-usage, which executes appropriate tools with detailed logs for text and image generation; and 
+          (3) Refinement, which reviews and enhances generated content by addressing errors and improving coherence. 
+          This <i>"Plan-Execute-Refine"</i> pipeline ensures outputs that closely adhere to user instructions while autonomously handling diverse tasks, 
+          leveraging multimodal language models and specialized tools to create cohesive, text-image-aligned content that goes beyond discrete blocks.
+        </md-block>
+      </div>
+      <!--/ Environment Infrastructure. -->
     </div>
   </section>
 
@@ -567,21 +316,13 @@
 
       <h2 class="title is-3">Benchmark</h2>
       <md-block>
-        We conduct evaluations on four of the most robust image-based MLLMs: GPT-4V(ision), GPT-4o, Qwen-VL-Max, and
-        Gemini-Pro-1.5.
-        We benchmark on three keyframe selection settings: (1) *Random*, where frames are sampled at fixed time
-        intervals within a video; (2) *Extracted*, with keyframes extracted using
-        [Katna](https://github.com/keplerlab/katna); and (3) *Human*, where keyframes are selected by humans during the
-        annotation process. For the *Random* and *Extracted* settings, we input 10 frames into each MLLM, while the
-        *Human* setting uses an average of 6.719 frames.
-        Each model's responses employ a three-step Chain-of-Thought (CoT) process, i.e., "Describe-Analyze-Answer", to
-        evaluate their peak performance. Additionally, we assessed three advanced VideoLLMs—ChatUnivi, Minigpt4-video,
-        and Videochat2—for their performance on GUI content.
-        To assess free-form questions and multiple-round conversations, we utilize the LLM-as-a-Judge methodology, which
-        assigns a similarity score ranging from 1 to 5 between MLLM's response and a predefined golden answer.
-        For a comprehensive evaluation, we also provide BLEU and BERTScore in our paper. For multiple-choice questions,
-        we measure performance using accuracy as the primary evaluation metric.
-        **We are actively updating the benchmark with new LLMs, VLMs and methods. Pull requests welcomed!**
+        We leverage GPT-4o for question generation and VQA in the ISG framework. 
+        Performance is evaluated against human-annotated ground truth with cross-validation, 
+        using varied sample sizes and metrics. Question generation is deemed correct based on 
+        subject/object matching and BERTScore. The VQA module employs an "Analyze-then-Judge" 
+        framework with "1-10" scoring and "Yes-or-No" options. Ablation studies examine vision inputs 
+        versus caption images and few-shot prompting. 
+        MLLM-as-a-Judge evaluation uses human agreement as the metric.
       </md-block>
     </div>
     <div class="cover" id="contentCover">
@@ -593,10 +334,8 @@
               <div class="infoBody">
                 <div class="tabs is-centered example_lst">
                   <ul>
-                    <li><a title="Overall">Overall</a></li>
-                    <li><a title="Software">Software</a></li>
-                    <li class="is-active"><a title="GUI Vid">GUI Vid</a></li>
-                    <li><a title="GPT-4o">GPT-4o</a></li>
+                    <li class="is-active"><a title="Overall">Evaluating ISG</a></li>
+                    <li><a title="Software">Ablation Study on ISG</a></li>
                   </ul>
 
                 </div>
@@ -620,757 +359,294 @@
                   }
 
                 </script>
-                <div title="Overall" class="lib_examples" id="BoardPanel1" style="display: none;">
+                <div title="Evaluating ISG" class="lib_examples" id="BoardPanel1" style="display: block;">
                   <!-- <div class="content has-text-justified"> -->
                   <md-block>
-                    Notice: Avg. = Average, MC = Multiple-Choice QA, Free = Free-Form QA, R. = Random, E. = Extracted, H. = Human-Selected
+                    Evaluating ISG with human annotations. All results for Pearson Similarity have a P-value lower than 0.005. 
+                    **Q-Gen:** Question generation module; **Acc+BS:** Accuracy and BertScore for block and question matching respectively.
+
                   </md-block>
                   <!-- </div> -->
                   <div class="table-container">
-                    <table>
+                    <table border="1" cellpadding="5" cellspacing="0">
                       <thead>
                         <tr>
-                          <th colspan="2" rowspan="2">Models</th>
-                          <th rowspan="2">Setting</th>
-                          <th colspan="2">Software</th>
-                          <th colspan="2">Website</th>
-                          <th colspan="2">XR</th>
-                          <th colspan="2">Multi</th>
-                          <th colspan="2">IOS</th>
-                          <th colspan="2">Android</th>
-                          <th colspan="2">Avg.</th>
+                          <th>Eval Level</th>
+                          <th>Eval Task</th>
+                          <th>Metric</th>
+                          <th>Size</th>
+                          <th>Avg.</th>
+                          <th colspan="4">Image</th>
+                          <th colspan="3">Image-Language</th>
+                          <th>Language</th>
                         </tr>
                         <tr>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
+                          <th colspan="5"></th>
+                          <th>Style</th>
+                          <th>Prog.</th>
+                          <th>3D</th>
+                          <th>Dec.</th>
+                          <th>I-T C.</th>
+                          <th>Temp.</th>
+                          <th>VST</th>
+                          <th>VQA</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <th rowspan="12">ImageLLMs</th>
-                          <th rowspan="2">Gemini-Pro-1.5</th>
-                          <td>R.</td>
-                          <td>81.7%</td>
-                          <td>3.339</td>
-                          <td>82.6%</td>
-                          <td>3.452</td>
-                          <td>81.2%</td>
-                          <td>3.154</td>
-                          <td>81.2%</td>
-                          <td>2.959</td>
-                          <td>82.0%</td>
-                          <td>3.213</td>
-                          <td>81.6%</td>
-                          <td>3.220</td>
-                          <td>81.7%</td>
-                          <td>3.223</td>
+                          <td>Structure</td>
+                          <td>Direct Match</td>
+                          <td>Accuracy</td>
+                          <td>1,150</td>
+                          <td>1.000</td>
+                          <td>1.000</td>
+                          <td>1.000</td>
+                          <td>1.000</td>
+                          <td>1.000</td>
+                          <td>1.000</td>
+                          <td>1.000</td>
+                          <td>1.000</td>
+                          <td>1.000</td>
                         </tr>
                         <tr>
-                          <td>E.</td>
-                          <td>78.5%</td>
-                          <td>3.152</td>
-                          <td>77.8%</td>
-                          <td>3.215</td>
-                          <td>80.8%</td>
-                          <td>3.006</td>
-                          <td>71.8%</td>
-                          <td>2.777</td>
-                          <td>79.3%</td>
-                          <td>3.007</td>
-                          <td>78.5%</td>
-                          <td>3.168</td>
-                          <td>77.8%</td>
-                          <td>3.054</td>
+                          <td rowspan="3">Block</td>
+                          <td>Q-Gen</td>
+                          <td>Acc+BS</td>
+                          <td>1,150</td>
+                          <td>0.967</td>
+                          <td>0.955</td>
+                          <td>0.988</td>
+                          <td>0.890</td>
+                          <td>0.970</td>
+                          <td>0.993</td>
+                          <td>0.980</td>
+                          <td>0.980</td>
+                          <td>0.980</td>
                         </tr>
                         <tr>
-                          <th rowspan="3">Qwen-VL-Max</th>
-                          <td>R.</td>
-                          <td>74.9%</td>
-                          <td>2.676</td>
-                          <td>76.9%</td>
-                          <td>2.656</td>
-                          <td>74.2%</td>
-                          <td>2.469</td>
-                          <td>68.8%</td>
-                          <td>2.432</td>
-                          <td>75.4%</td>
-                          <td>2.779</td>
-                          <td>73.7%</td>
-                          <td>2.309</td>
-                          <td>74.0%</td>
-                          <td>2.553</td>
+                          <td rowspan="2">VQA Score<br>VQA YesNo</td>
+                          <td rowspan="2">Pearson</td>
+                          <td rowspan="2">1,092</td>
+                          <td>0.718</td>
+                          <td>0.482</td>
+                          <td>0.529</td>
+                          <td>0.581</td>
+                          <td>0.850</td>
+                          <td>0.778</td>
+                          <td>0.816</td>
+                          <td>0.873</td>
+                          <td>0.835</td>
                         </tr>
                         <tr>
-                          <td>E.</td>
-                          <td>74.3%</td>
-                          <td>2.624</td>
-                          <td>75.8%</td>
-                          <td>2.627</td>
-                          <td>69.0%</td>
-                          <td>2.499</td>
-                          <td>64.8%</td>
-                          <td>2.362</td>
-                          <td>77.4%</td>
-                          <td>2.659</td>
-                          <td>65.8%</td>
-                          <td>2.277</td>
-                          <td>71.2%</td>
-                          <td>2.508</td>
+                          <td>0.446</td>
+                          <td>0.169</td>
+                          <td>0.386</td>
+                          <td>0.528</td>
+                          <td>0.382</td>
+                          <td>0.555</td>
+                          <td>0.388</td>
+                          <td>0.634</td>
+                          <td>0.529</td>
                         </tr>
                         <tr>
-                          <td>H.</td>
-                          <td>75.8%</td>
-                          <td>2.651</td>
-                          <td>75.5%</td>
-                          <td>2.698</td>
-                          <td>77.6%</td>
-                          <td>2.373</td>
-                          <td>66.9%</td>
-                          <td>2.490</td>
-                          <td>74.3%</td>
-                          <td>2.633</td>
+                          <td rowspan="2">Image</td>
+                          <td>Q-Gen</td>
+                          <td>Acc+BS</td>
+                          <td>1,150</td>
+                          <td>0.811</td>
+                          <td>0.949</td>
+                          <td>0.761</td>
+                          <td>0.553</td>
+                          <td>0.925</td>
+                          <td>0.884</td>
+                          <td>0.817</td>
+                          <td>0.792</td>
                           <td>-</td>
+                        </tr>
+                        <tr>
+                          <td>VQA YesNo</td>
+                          <td>Accuracy</td>
+                          <td>4,871</td>
+                          <td>0.907</td>
+                          <td>0.851</td>
+                          <td>0.873</td>
+                          <td>0.863</td>
+                          <td>0.937</td>
+                          <td>0.968</td>
+                          <td>0.921</td>
+                          <td>0.934</td>
                           <td>-</td>
-                          <td>74.0%</td>
-                          <td>2.569</td>
                         </tr>
                         <tr>
-                          <th rowspan="6">GPT-4V</th>
-                          <td>R.</td>
-                          <td>81.5%</td>
-                          <td>3.589</td>
-                          <td>80.9%</td>
-                          <td>3.648</td>
-                          <td>82.4%</td>
-                          <td>3.200</td>
-                          <td>75.0%</td>
-                          <td>3.452</td>
-                          <td>82.5%</td>
-                          <td><b>3.614</b></td>
-                          <td>78.3%</td>
-                          <td>3.515</td>
-                          <td>79.8%</td>
-                          <td>3.503</td>
+                          <td rowspan="2">Holistic</td>
+                          <td>w. GT</td>
+                          <td rowspan="2">Agreement</td>
+                          <td rowspan="2">260</td>
+                          <td>0.730</td>
+                          <td>0.720</td>
+                          <td>0.620</td>
+                          <td>0.660</td>
+                          <td>0.600</td>
+                          <td>0.950</td>
+                          <td>0.750</td>
+                          <td>0.640</td>
+                          <td>0.900</td>
                         </tr>
                         <tr>
-                          <td>E.</td>
-                          <td>85.1%</td>
-                          <td>3.407</td>
-                          <td>80.1%</td>
-                          <td>3.433</td>
-                          <td>81.8%</td>
-                          <td>2.892</td>
-                          <td>81.9%</td>
-                          <td>3.219</td>
-                          <td><b>86.4%</b></td>
-                          <td>3.427</td>
-                          <td>79.9%</td>
-                          <td>3.176</td>
-                          <td>82.6%</td>
-                          <td>3.259</td>
-                        </tr>
-                        <tr>
-                          <td>H.</td>
-                          <td>86.0%</td>
-                          <td>3.520</td>
-                          <td>79.8%</td>
-                          <td>3.655</td>
-                          <td>83.4%</td>
-                          <td>3.200</td>
-                          <td>76.9%</td>
-                          <td>3.449</td>
-                          <td>79.9%</td>
-                          <td>3.453</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>81.2%</td>
-                          <td>3.469</td>
-                        </tr>
-                        <tr>
-                          <td>D.C.</td>
-                          <td>85.0%</td>
-                          <td>3.350</td>
-                          <td>83.1%</td>
-                          <td>3.658</td>
-                          <td>82.3%</td>
-                          <td>3.065</td>
-                          <td><b>84.2%</b></td>
-                          <td>3.358</td>
-                          <td>81.6%</td>
-                          <td>3.358</td>
-                          <td>81.7%</td>
-                          <td>3.427</td>
-                          <td>83.0%</td>
-                          <td>3.316</td>
-                        </tr>
-                        <tr>
-                          <td>C.C.</td>
-                          <td>80.7%</td>
-                          <td>3.028</td>
-                          <td>72.2%</td>
-                          <td>3.160</td>
-                          <td>76.5%</td>
-                          <td>2.868</td>
-                          <td>76.4%</td>
-                          <td>2.939</td>
-                          <td>78.3%</td>
-                          <td>2.751</td>
-                          <td>81.7%</td>
-                          <td>3.160</td>
-                          <td>78.3%</td>
-                          <td>2.971</td>
-                        </tr>
-                        <tr>
-                          <td>H.+D.C.</td>
-                          <td>82.5%</td>
-                          <td>3.494</td>
-                          <td>83.2%</td>
-                          <td>3.682</td>
-                          <td><b>85.9%</b></td>
-                          <td>3.191</td>
-                          <td>83.9%</td>
-                          <td>3.617</td>
-                          <td>80.9%</td>
-                          <td>3.516</td>
-                          <td>84.9%</td>
-                          <td><b>3.758</b></td>
-                          <td>83.5%</td>
-                          <td>3.543</td>
-                        </tr>
-                        <tr>
-                          <th>GPT-4o</th>
-                          <td>H.</td>
-                          <td><b>86.5%</b></td>
-                          <td><b>3.644</b></td>
-                          <td><b>83.3%</b></td>
-                          <td><b>3.740</b></td>
-                          <td>84.3%</td>
-                          <td><b>3.285</b></td>
-                          <td>81.1%</td>
-                          <td><b>3.654</b></td>
-                          <td>83.3%</td>
-                          <td>3.558</td>
-                          <td><b>90.0%</b></td>
-                          <td>3.561</td>
-                          <td><b>84.8%</b></td>
-                          <td><b>3.573</b></td>
-                        </tr>
-                        <tr>
-                          <th rowspan="4">VideoLLMs</th>
-                          <th>ChatUnivi</th>
-                          <td>-</td>
-                          <td>28.4%</td>
-                          <td>2.389</td>
-                          <td>22.2%</td>
-                          <td>2.349</td>
-                          <td>20.6%</td>
-                          <td>2.161</td>
-                          <td>17.5%</td>
-                          <td>2.275</td>
-                          <td>22.6%</td>
-                          <td>2.337</td>
-                          <td>23.0%</td>
-                          <td>2.390</td>
-                          <td>22.4%</td>
-                          <td>2.317</td>
-                        </tr>
-                        <tr>
-                          <th>Minigpt4Video</th>
-                          <td>-</td>
-                          <td>18.9%</td>
-                          <td>1.475</td>
-                          <td>15.3%</td>
-                          <td>1.520</td>
-                          <td>16.3%</td>
-                          <td>1.362</td>
-                          <td>15.4%</td>
-                          <td>1.457</td>
-                          <td>20.1%</td>
-                          <td>1.501</td>
-                          <td>14.6%</td>
-                          <td>1.342</td>
-                          <td>16.8%</td>
-                          <td>1.443</td>
-                        </tr>
-                        <tr>
-                          <th>VideoChat2</th>
-                          <td>-</td>
-                          <td>45.5%</td>
-                          <td>2.144</td>
-                          <td>42.6%</td>
-                          <td>2.221</td>
-                          <td>44.0%</td>
-                          <td>2.005</td>
-                          <td>40.4%</td>
-                          <td>2.222</td>
-                          <td>40.2%</td>
-                          <td>2.169</td>
-                          <td>44.7%</td>
-                          <td>2.119</td>
-                          <td>42.9%</td>
-                          <td>2.147</td>
-                        </tr>
-                        <tr>
-                          <th rowspan="2">GUI-Vid</th>
-                          <td> - </td>
-                          <td><b>59.9%</b></td>
-                          <td><b>2.847</b></td>
-                          <td><b>54.1%</b></td>
-                          <td><b>2.957</b></td>
-                          <td><b>55.6%</b></td>
-                          <td><b>2.764</b></td>
-                          <td><b>52.9%</b></td>
-                          <td><b>2.861</b></td>
-                          <td><b>51.8%</b></td>
-                          <td><b>2.773</b></td>
-                          <td><b>53.4%</b></td>
-                          <td><b>2.572</b></td>
-                          <td><b>54.6%</b></td>
-                          <td><b>2.796</b></td>
+                          <td>w.o. GT</td>
+                          <td>0.537</td>
+                          <td>0.600</td>
+                          <td>0.460</td>
+                          <td>0.450</td>
+                          <td>0.400</td>
+                          <td>0.900</td>
+                          <td>0.600</td>
+                          <td>0.370</td>
+                          <td>0.800</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
 
-                <div title="Software" class="lib_examples" id="BoardPanel2" style="display: none;">
+                <div title="Ablation Study on ISG" class="lib_examples" id="BoardPanel2" style="display: none;">
                   <!-- <div class="content has-text-justified"> -->
                   <md-block>
-                    Notice: Desc. = Detailed Description, Dyn. = Dynamic Tasks, Pred. = Prediction Tasks, R. = Random, E. = Extracted, H. = Human.
+                    Ablation study on vision input and few-shot helps tuple construction in both block-level
+and image-level. For language-dominate tasks, we do not require accurate image generation.
                   </md-block>
                   <!-- </div> -->
 
                   <div class="table-container">
-                    <table>
+                    <table border="1" cellpadding="5" cellspacing="0">
                       <thead>
                         <tr>
-                          <th rowspan="2">Models</th>
-                          <th rowspan="2">Setting</th>
-                          <th colspan="2">Caption</th>
-                          <th colspan="3">Complex Tasks</th>
-                          <th colspan="2">Conversation</th>
-                          <th rowspan="2">Average</th>
+                          <th>Eval Level</th>
+                          <th>Vision</th>
+                          <th>Few-Shot</th>
+                          <th>Avg.</th>
+                          <th colspan="4">Image</th>
+                          <th colspan="3">Image-Language</th>
+                          <th>Language</th>
                         </tr>
                         <tr>
-                          <th>Concise</th>
-                          <th>Desc.</th>
-                          <th>Static</th>
-                          <th>Dyn.</th>
-                          <th>Pred.</th>
-                          <th>Round 1</th>
-                          <th>Round 2</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="header-group">
-                          <td rowspan="12">ImageLLMs</td>
-                          <td rowspan="2">Gemini-Pro-1.5</td>
-                          <td>R.</td>
-                          <td>3.659</td>
-                          <td>2.837</td>
-                          <td>2.969</td>
-                          <td>2.822</td>
-                          <td>3.450</td>
-                          <td>3.608</td>
-                          <td>3.845</td>
-                          <td>3.339</td>
-                        </tr>
-                        <tr>
-                          <td>E.</td>
-                          <td>3.350</td>
-                          <td>2.468</td>
-                          <td>2.741</td>
-                          <td>2.431</td>
-                          <td>3.292</td>
-                          <td>3.458</td>
-                          <td>3.837</td>
-                          <td>3.152</td>
-                        </tr>
-                        <tr class="header-group">
-                          <td rowspan="3">Qwen-VL-Max</td>
-                          <td>R.</td>
-                          <td>2.381</td>
-                          <td>1.758</td>
-                          <td>2.277</td>
-                          <td>2.144</td>
-                          <td>2.724</td>
-                          <td>3.125</td>
-                          <td>3.317</td>
-                          <td>2.676</td>
-                        </tr>
-                        <tr>
-                          <td>E.</td>
-                          <td>2.459</td>
-                          <td>1.693</td>
-                          <td>2.143</td>
-                          <td>1.954</td>
-                          <td>2.742</td>
-                          <td>3.174</td>
-                          <td>3.298</td>
-                          <td>2.624</td>
-                        </tr>
-                        <tr>
-                          <td>H.</td>
-                          <td>2.474</td>
-                          <td>1.711</td>
-                          <td>2.137</td>
-                          <td>2.032</td>
-                          <td>2.834</td>
-                          <td>3.223</td>
-                          <td>3.257</td>
-                          <td>2.651</td>
-                        </tr>
-                        <tr class="header-group">
-                          <td rowspan="6">GPT-4V</td>
-                          <td>R.</td>
-                          <td>3.579</td>
-                          <td>2.676</td>
-                          <td><b>3.243</b></td>
-                          <td>3.011</td>
-                          <td>3.630</td>
-                          <td>3.925</td>
-                          <td>4.131</td>
-                          <td>3.589</td>
-                        </tr>
-                        <tr>
-                          <td>E.</td>
-                          <td>3.141</td>
-                          <td>2.301</td>
-                          <td>2.927</td>
-                          <td>2.627</td>
-                          <td>3.541</td>
-                          <td>3.844</td>
-                          <td>4.103</td>
-                          <td>3.407</td>
-                        </tr>
-                        <tr>
-                          <td>H.</td>
-                          <td>3.352</td>
-                          <td>2.509</td>
-                          <td>3.053</td>
-                          <td>2.849</td>
-                          <td>3.609</td>
-                          <td>3.928</td>
-                          <td>4.163</td>
-                          <td>3.520</td>
-                        </tr>
-                        <tr>
-                          <td>C.C.</td>
-                          <td>3.454</td>
-                          <td>2.547</td>
-                          <td>1.818</td>
-                          <td>2.335</td>
-                          <td>3.577</td>
-                          <td>3.521</td>
-                          <td>3.884</td>
-                          <td>3.028</td>
-                        </tr>
-                        <tr>
-                          <td>D.C.</td>
-                          <td>3.412</td>
-                          <td>2.627</td>
-                          <td>2.603</td>
-                          <td>2.591</td>
-                          <td>3.723</td>
-                          <td>3.759</td>
-                          <td>4.072</td>
-                          <td>3.350</td>
-                        </tr>
-                        <tr>
-                          <td>H.+D.C.</td>
-                          <td>3.436</td>
-                          <td>2.677</td>
-                          <td>2.927</td>
-                          <td>2.750</td>
-                          <td><b>3.791</b></td>
-                          <td>3.857</td>
-                          <td>4.148</td>
-                          <td>3.494</td>
-                        </tr>
-                        <tr class="header-group">
-                          <td>GPT-4o</td>
-                          <td>H.</td>
-                          <td><b>4.048</b></td>
-                          <td><b>3.028</b></td>
-                          <td>3.125</td>
-                          <td><b>3.117</b></td>
-                          <td>3.562</td>
-                          <td><b>4.129</b></td>
-                          <td><b>4.318</b></td>
-                          <td><b>3.644</b></td>
-                        </tr>
-                        <tr class="header-group">
-                          <td rowspan="4">VideoLLMs</td>
-                          <td>ChatUnivi</td>
-                          <td>-</td>
-                          <td>1.587</td>
-                          <td>1.240</td>
-                          <td>1.705</td>
-                          <td>1.656</td>
-                          <td>2.524</td>
-                          <td>2.698</td>
-                          <td>3.366</td>
-                          <td>2.389</td>
-                        </tr>
-                        <tr>
-                          <td>Minigpt4Video</td>
-                          <td>-</td>
-                          <td>1.246</td>
-                          <td>1.073</td>
-                          <td>1.249</td>
-                          <td>1.235</td>
-                          <td>1.675</td>
-                          <td>1.494</td>
-                          <td>1.719</td>
-                          <td>1.475</td>
-                        </tr>
-                        <tr>
-                          <td>VideoChat2</td>
-                          <td>-</td>
-                          <td>1.992</td>
-                          <td>1.312</td>
-                          <td>1.812</td>
-                          <td>1.682</td>
-                          <td>2.158</td>
-                          <td>2.342</td>
-                          <td>2.720</td>
-                          <td>2.144</td>
-                        </tr>
-                        <tr class="header-group">
-                          <td>GUI-Vid</td>
-                          <td>-</td>
-                          <td><b>3.562</b></td>
-                          <td><b>2.058</b></td>
-                          <td><b>2.376</b></td>
-                          <td><b>2.090</b></td>
-                          <td><b>3.435</b></td>
-                          <td><b>3.080</b></td>
-                          <td><b>3.260</b></td>
-                          <td><b>2.847</b></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div title="GUI Vid" class="lib_examples" id="BoardPanel3" style="display: block;">
-
-                  <!-- <div class="content has-text-justified"> -->
-                  <md-block>
-                    Notice: F.K. = Keyframes in Fintuning, E.K. = Keyframes in Evaluation, I. = Image, V. = Video, MC = Multiple-Choice QA, Free = Free-Form QA
-                  </md-block>
-                  <!-- </div> -->
-
-                  <div class="table-container">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th rowspan="2">Setting</th>
-                          <th rowspan="2">F.K.</th>
-                          <th rowspan="2">E.K.</th>
-                          <th colspan="2">Data</th>
-                          <th colspan="2">Software</th>
-                          <th colspan="2">Website</th>
-                          <th colspan="2">XR</th>
-                          <th colspan="2">Multi</th>
-                          <th colspan="2">IOS</th>
-                          <th colspan="2">Android</th>
-                          <th colspan="2">Avg.</th>
-                        </tr>
-                        <tr>
-                          <th>I.</th>
-                          <th>V.</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
-                          <th>MC</th>
-                          <th>Free</th>
+                          <th colspan="4"></th>
+                          <th>Style</th>
+                          <th>Prog.</th>
+                          <th>3D</th>
+                          <th>Dec.</th>
+                          <th>I-T C.</th>
+                          <th>Temp.</th>
+                          <th>VST</th>
+                          <th>VQA</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td rowspan="2">Baseline</td>
+                          <td rowspan="4">Block</td>
+                          <td>&#10008;</td>
+                          <td>&#10008;</td>
+                          <td>0.631</td>
+                          <td>0.635</td>
+                          <td>0.801</td>
+                          <td>0.495</td>
+                          <td>0.778</td>
+                          <td>0.725</td>
+                          <td>0.621</td>
+                          <td>0.787</td>
+                          <td>0.207</td>
+                        </tr>
+                        <tr>
+                          <td>&#10008;</td>
+                          <td>&#10004;</td>
+                          <td><strong>0.967</strong></td>
+                          <td><strong>0.955</strong></td>
+                          <td><strong>0.988</strong></td>
+                          <td><strong>0.890</strong></td>
+                          <td><strong>0.970</strong></td>
+                          <td><strong>0.993</strong></td>
+                          <td><strong>0.980</strong></td>
+                          <td><strong>0.980</strong></td>
+                          <td><strong>0.980</strong></td>
+                        </tr>
+                        <tr>
+                          <td>&#10004;</td>
+                          <td>&#10008;</td>
+                          <td>0.671</td>
+                          <td>0.662</td>
+                          <td>0.858</td>
+                          <td>0.575</td>
+                          <td>0.810</td>
+                          <td>0.739</td>
+                          <td>0.649</td>
+                          <td>0.848</td>
+                          <td>0.224</td>
+                        </tr>
+                        <tr>
+                          <td>&#10004;</td>
+                          <td>&#10004;</td>
+                          <td>0.942</td>
+                          <td>0.934</td>
+                          <td>0.959</td>
+                          <td>0.822</td>
+                          <td>0.969</td>
+                          <td>0.981</td>
+                          <td>0.970</td>
+                          <td>0.949</td>
+                          <td>0.954</td>
+                        </tr>
+                        <tr>
+                          <td rowspan="4">Image</td>
+                          <td>&#10008;</td>
+                          <td>&#10008;</td>
+                          <td>0.688</td>
+                          <td>0.873</td>
+                          <td>0.751</td>
+                          <td>0.497</td>
+                          <td>0.908</td>
+                          <td>0.575</td>
+                          <td>0.526</td>
+                          <td>0.684</td>
                           <td>-</td>
-                          <td>8</td>
+                        </tr>
+                        <tr>
+                          <td>&#10008;</td>
+                          <td>&#10004;</td>
+                          <td>0.804</td>
+                          <td>0.902</td>
+                          <td><strong>0.796</strong></td>
+                          <td>0.518</td>
+                          <td>0.905</td>
+                          <td>0.869</td>
+                          <td><strong>0.859</strong></td>
+                          <td>0.780</td>
                           <td>-</td>
+                        </tr>
+                        <tr>
+                          <td>&#10004;</td>
+                          <td>&#10008;</td>
+                          <td>0.711</td>
+                          <td>0.943</td>
+                          <td>0.755</td>
+                          <td>0.535</td>
+                          <td>0.951</td>
+                          <td>0.586</td>
+                          <td>0.539</td>
+                          <td>0.671</td>
                           <td>-</td>
-                          <td>45.5%</td>
-                          <td>2.144</td>
-                          <td>42.6%</td>
-                          <td>2.221</td>
-                          <td>44.0%</td>
-                          <td>2.005</td>
-                          <td>40.4%</td>
-                          <td>2.222</td>
-                          <td>40.2%</td>
-                          <td>2.169</td>
-                          <td>44.7%</td>
-                          <td>2.119</td>
-                          <td>42.9%</td>
-                          <td>2.147</td>
                         </tr>
                         <tr>
+                          <td>&#10004;</td>
+                          <td>&#10004;</td>
+                          <td><strong>0.811</strong></td>
+                          <td><strong>0.949</strong></td>
+                          <td>0.761</td>
+                          <td><strong>0.553</strong></td>
+                          <td><strong>0.925</strong></td>
+                          <td><strong>0.884</strong></td>
+                          <td>0.817</td>
+                          <td><strong>0.792</strong></td>
                           <td>-</td>
-                          <td>16</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>45.1%</td>
-                          <td>2.144</td>
-                          <td>41.8%</td>
-                          <td>2.240</td>
-                          <td>41.0%</td>
-                          <td>2.007</td>
-                          <td>40.7%</td>
-                          <td>2.238</td>
-                          <td>39.9%</td>
-                          <td>2.138</td>
-                          <td>44.7%</td>
-                          <td>2.147</td>
-                          <td>42.2%</td>
-                          <td>2.154</td>
-                        </tr>
-                        <tr>
-                          <td rowspan="4">GUI-Vid</td>
-
-                          <td rowspan="4">8</td>
-                          <td rowspan="2">8</td>
-                          <td>✖</td>
-                          <td>✔</td>
-                          <td>58.3%</td>
-                          <td>2.709</td>
-                          <td>53.6%</td>
-                          <td>2.817</td>
-                          <td>62.2%</td>
-                          <td>2.626</td>
-                          <td><b>54.2%</b></td>
-                          <td>2.627</td>
-                          <td>53.1%</td>
-                          <td>2.708</td>
-                          <td>54.9%</td>
-                          <td>2.501</td>
-                          <td>56.0%</td>
-                          <td>2.665</td>
-                        </tr>
-                        <tr>
-                          <td>✔</td>
-                          <td>✔</td>
-                          <td><b>59.9%</b></td>
-                          <td><b>2.856</b></td>
-                          <td>54.1%</td>
-                          <td>2.925</td>
-                          <td>59.0%</td>
-                          <td>2.751</td>
-                          <td>52.1%</td>
-                          <td>2.837</td>
-                          <td>50.0%</td>
-                          <td>2.756</td>
-                          <td>54.0%</td>
-                          <td>2.571</td>
-                          <td>54.8%</td>
-                          <td>2.782</td>
-                        </tr>
-                        <tr>
-                          <td rowspan="2">16</td>
-                          <td>✖</td>
-                          <td>✔</td>
-                          <td>59.0%</td>
-                          <td>2.709</td>
-                          <td><b>55.1%</b></td>
-                          <td>2.821</td>
-                          <td><b>62.8%</b></td>
-                          <td>2.645</td>
-                          <td>53.3%</td>
-                          <td>2.624</td>
-                          <td><b>55.5%</b></td>
-                          <td>2.727</td>
-                          <td><b>55.7%</b></td>
-                          <td>2.501</td>
-                          <td><b>56.9%</b></td>
-                          <td>2.671</td>
-                        </tr>
-                        <tr>
-                          <td>✔</td>
-                          <td>✔</td>
-                          <td><b>59.9%</b></td>
-                          <td>2.847</td>
-                          <td>54.1%</td>
-                          <td><b>2.957</b></td>
-                          <td>55.6%</td>
-                          <td><b>2.764</b></td>
-                          <td>52.9%</td>
-                          <td><b>2.861</b></td>
-                          <td>51.8%</td>
-                          <td><b>2.772</b></td>
-                          <td>53.4%</td>
-                          <td><b>2.572</b></td>
-                          <td>54.6%</td>
-                          <td><b>2.796</b></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div title="GPT-4o" class="lib_examples" id="BoardPanel4" style="display: none;">
-
-                  <!-- <div class="content has-text-justified"> -->
-                  <md-block>
-                    Notice: Res. = Resolution, Desc. = Detailed Description, Conv. = Conversation, Dyn. = Dynamic
-                  </md-block>
-                  <!-- </div> -->
-
-                  <div class="table-container">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Res.</th>
-                          <th>Desc.</th>
-                          <th>Conv.</th>
-                          <th>Dyn.</th>
-                          <th>Static</th>
-                          <th>Caption</th>
-                          <th>Average</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><b>Low</b></td>
-                          <td>2.794</td>
-                          <td>3.912</td>
-                          <td>3.150</td>
-                          <td>2.869</td>
-                          <td>3.672</td>
-                          <td>3.394</td>
-                        </tr>
-                        <tr class="bold">
-                          <td><b>High</b></td>
-                          <td><b>3.031</b></td>
-                          <td><b>4.056</b></td>
-                          <td><b>3.318</b></td>
-                          <td><b>3.131</b></td>
-                          <td><b>3.911</b></td>
-                          <td><b>3.573</b></td>
                         </tr>
                       </tbody>
                     </table>
@@ -1384,6 +660,26 @@
     </div>
   </section>
 
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Environment Infrastructure. -->
+      <h2 class="title is-3">Benchmarking Interleaved Text-and-Image Generation</h2>
+      <div class="content has-text-justified">
+        <img src="img/ISG-Bench-Radar.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
+        <md-block> 
+          We evaluate 10 frameworks capable of generating interleaved text-and-image
+          content, four recently released unified models, Show-o, Anole, Minigpt-5, CoMM-Minigpt-5 , SEED-LLaMA as well as two compositional settings, using Gemini-1.5-Pro (GeminiTeam, 2023)
+          and Claude-3.5-Sonnet as a multimodal preceptor2
+          and SD3 as its generator, with SD2.1 for ablation study. For our ISG-AGENT, we
+          use GPT-4o for planning and verification agent, and use Claude-3.5-Sonnet for tool selector, with
+          SD3 as image generator and multiple tools (UltraEdit, DynamiCrafter, SV3D, DreamMover).
+        </md-block>
+        <img src="img/case-study.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
+      </div>
+      <!--/ Environment Infrastructure. -->
+    </div>
+  </section>
+
   <section class="section" id="Empirical Result">
     <div class="container is-max-desktop">
       <div class="featurecard-container">
@@ -1391,26 +687,22 @@
         <h1 class="title">Empirical Results</h1>
         <div class="feature_1x1">
           <div class="featurecard">
-            <h2>Commercial ImageLLMs outperform Open-source VideoLLMs in Zero-shot Settings</h2>
+            <h2>ISG demonstrates commendable performance across all
+              tasks</h2>
           </div>
           <div class="description">
             <p>
-            <ol>
-              <li><b>Commercial ImageLLMs, notably GPT-4V and GPT-4o, consistently outperform open-source
-                  VideoLLMs in zero-shot settings.
-                  GPT-4o exhibits superior performance across all GUI scenarios in complex tasks, reflected in its
-                  high scores in both multiple-choice and free-form queries, with an average of 84.8% and 3.573.
-                  Similarly, Gemini demonstrates strong capabilities in captioning and descriptive tasks within
-                  software and iOS environments, scoring 2.836 and 2.936, respectively.
-                  Further analysis reveals that GPT-4V excels in applications with minimal textual content and
-                  simple layouts, such as TikTok, health apps, and GitHub.
-                  In contrast, its performance drops in more intricate applications like Microsoft ToDo and XR
-                  software.
-                  As for VideoLLMs, their significantly poorer performance is attributed to two main factors:
-                  their inability to accurately interpret GUI content from user inputs and a lack of sufficient
-                  GUI-oriented pretraining, which is evident from their inadequate performance in basic captioning
-                  and description tasks.</li>
-            </ol>
+                Each module within ISG aligns well with human annotation. For structure,
+              ISG exhibits consistent excellence across all tasks, indicating
+              robust potential for capturing structural requirements in interleaved generation instructions. 
+                In both Q-Gen and VQA modules, ISG successfully extracts fine-grained requirements with high fidelity to ground truth. 
+                For VQA module, the scoring approach consistently outperforms the
+                “Yes-or-No” method, suggesting that more nuanced judgments align better with human evaluations. Vision-guided tasks consistently
+                underperform compared to other tasks, with a noticeable decline in both Q-Gen and VQA modules,
+                underscoring the challenges in automatically evaluating fine-grained aspects of interleaved text-and-
+                image generation. In holistic evaluation, leveraging a golden answer significantly outperforms the
+                zero-shot judging setting of MLLMs, especially in vision-guided tasks, yielding an average 20%
+                improvement in human agreement.
             </p>
           </div>
         </div>
@@ -1418,18 +710,16 @@
         <!-- Alignment of LLMs -->
         <div class="feature_1x1">
           <div class="featurecard">
-            <h2>Performance Variate in Different GUI Scenarios</h2>
+            <h2>Ablation Study on Vision Input and Few-shot Prompting</h2>
           </div>
           <div class="description">
             <p>
-              GPT-4V and Gemini excel in common scenarios such as mobile and website interfaces but show marked
-              deficiencies in more complex GUI environments like XR and multi-window interactions, across both
-              captioning and intricate tasks.
-              This performance gap highlights a significant shortfall in understanding environments where GUI
-              elements are scattered and demand sophisticated interpretation.
-              It emphasizes the critical need for specialized benchmarks and datasets tailored to these complex
-              GUI scenarios, which is essential for enhancing the GUI-oriented capabilities of MLLMs, paving the
-              way for them to become truly reliable and high-performing general control agents.
+              We evaluate our ISG under two conditions: vision input and few-shot examples, for a more comprehensive study. Multimodal input varies in block-level and image-level question generation, with a slight enhance-
+              ment in image-level question generation. In addition, few-shot in-context learning provides dramatic
+              enhancement on both tasks, improving performance by more than 30% in block-level and 10% in
+              image-level tasks, especially in vision-language guided tasks by limiting requirements for the predicted generative content. For language-guided tasks, few-shot learning brings a 70% enhancement
+              in block-level performance, further demonstrating the accurate evaluation framework establishment
+              for this type of creative generation task.
             </p>
           </div>
         </div>
@@ -1437,21 +727,21 @@
         <!-- Performance Gap in Trustworthiness -->
         <div class="feature_1x1">
           <div class="featurecard">
-            <h2>Keyframe Selection is Important for GUI-oriented Tasks</h2>
+            <h2>Unified models underperform in accurate interleaved generation</h2>
           </div>
           <div class="description">
             <p>
-              Across both basic tasks such as captioning and more complex tasks like prediction and reasoning,
-              significant variations are evident among keyframe selection methods.
-              GPT-4V and Gemini significantly benefit from using random-selected and human-selected keyframes,
-              scoring approximately 0.2-0.3 points higher in both captioning and free-form tasks than those using
-              programmatic extraction.
-              This suggests that traditional keyframe technologies, designed for natural videos, are less
-              effective for detecting essential GUI operations, particularly when subtle movements like mouse
-              clicks and dynamic changes are involved.
-              Conversely, the difference in performance is relatively smaller in Qwen-VL-Max, indicating that
-              while keyframe selection methods are crucial for models proficient in GUI content, they exert less
-              influence on less capable models.
+              All unified models exhibit significant deficiencies in following instructions to
+               generate interleaved text-and-image content. Many models produced only one to 
+               three images, while some failed to generate any images at all. Consequently, 
+               these models could not be subjected to block-level and image-level evaluation protocols. 
+               In terms of holistic evaluation, the models demonstrated superior capabilities in language-dominant tasks, 
+               while notably underperforming in vision-dominant tasks. This disparity further proves the hypothesis that current 
+               training datasets for unified models lack sufficient vision-dominant instruction tuning samples, such as those for 
+               "Style Transfer" and "Image Decomposition". Notably, Show-o, as one of the first unified autoregressive models, 
+               stands out in precise generation structure but falls short in generating high-quality responses due to hallucinations, 
+               which generate images related to system prompts instead of user's instructions. Moreover, Anole also shows potential in 
+               interleaved generation and achieves state-of-the-art results among other unified models, suggesting the potential efficacy of its advanced architecture.
             </p>
           </div>
         </div>
@@ -1461,78 +751,72 @@
         <div class="feature_1x1">
 
           <div class="featurecard">
-            <h2>Dynamic GUI Tasks Continue to Challenge MLLMs</h2>
+            <h2>ISG-Agent outperforms in vision-dominated tasks</h2>
           </div>
           <div class="description">
             <p>
-              In the fine-grained tasks, GPT-4V and GPT-4o excel with static GUI content and prediction tasks over
-              image sequences but struggle with providing detailed descriptions for entire videos and dynamic GUI
-              content.
-              This discrepancy is attributed to minor variations in GUI that significantly impact descriptions.
-              Enhancing the number of keyframes and the granularity of perception might mitigate these issues.
-              Among VideoLLMs, ChatUnivi excels in conversational tasks by effectively leveraging contextual
-              nuances, particularly in subsequent rounds, yet it underperforms in GUI-oriented captioning tasks.
-              In contrast, GUI-Vid demonstrates proficiency in sequential tasks but falls short in both captioning
-              and static content handling.
-              This gap is linked to deficiencies in GUI-Vid’s pretraining, which lacked comprehensive GUI content
-              crucial for effective vision-text alignment, as evidenced by its poor performance and an instruction
-              tuning process also failed to fully address these shortcomings.</p>
+              ISG-Agent strictly follows users' requirements to generate interleaved content, 
+              achieving comparative results to human's golden answer in various tasks in both block-level 
+              and image-level, especially in vision-dominated tasks like "Style Transfer" and "3D Scene". 
+              The state-of-the-art results in "Progressive Transformation" also demonstrate good coherence of the image content, 
+              even accommodating to human-collected answers. Although LLM+Diffusion frameworks fall short in accurate instruction-following, 
+              they achieve state-of-the-art results in holistic evaluation in some language-dominated tasks, 
+              demonstrating their high generation quality of textual information.</p>
 
           </div>
         </div>
         <div class="feature_1x1">
 
           <div class="featurecard">
-            <h2>Vision Perception is Important for Sequential GUI Tasks</h2>
+            <h2>Vision-dominated tasks challenge all models.</h2>
           </div>
           <div class="description">
             <p>
-              Integrating detailed textual information slightly outperforms purely vision-based inputs or detailed
-              captions, akin to a Chain of Thought (CoT) setting.
-              Surprisingly, GPT-4V excels in caption and prediction tasks with just detailed captions, providing
-              insights on enhancing specific GUI-oriented tasks through additional textual information.
-              However, it still falls short in more challenging tasks, such as retrieving static or dynamic
-              content. This underscores the critical role of visual perception in GUI environments, where even
-              minor changes can significantly impact outcomes.</p>
+               Given that these compositional frameworks perceive images and generate images separately, 
+               not end to end, they naturally cannot perform these tasks well such as accurate image editing 
+               due to their inherent structure. On the other hand, although these unified models have the potential 
+               to understand and generate images in an end-to-end manner and announce their capability in vision generative 
+               tasks such as "Image Generation" or "Image Editing", they fall short in understanding multimodal queries to 
+               generate interleaved content with multiple images. The best unified model Anole fails to understand the output 
+               format and deviates from the context of input images, demonstrating their deficiency in generating images in vision in-context learning.</p>
 
           </div>
         </div>
         <div class="feature_1x1">
 
           <div class="featurecard">
-            <h2>Supreme Enhancement of GUI-Vid on Graphic-based Interface After Finetuned on GUI-World</h2>
+            <h2>MLLM-as-a-Judge cannot evaluate fine-grained accurate generation.</h2>
           </div>
           <div class="description">
             <p>
-              As a pioneering study in training VideoLLMs as screen agents, GUI-Vid significantly outperforms the
-              baseline model, showing an average improvement of 30% across various tasks and GUI scenarios, even
-              surpassing the commercial ImageLLM, Qwen-VL-Max.
-              This enhancement is particularly notable in captioning and prediction over image sequences, where
-              GUI-Vid matches the performance of GPT-4V and Gemini-Pro. Our two-stage progressive fintuning
-              significantly enhances the performance in all GUI scenarios.
-              Remarkably, GUI-Vid scored 3.747 in caption tasks within the XR scenario, highlighting its potential
-              in XR applications and the high-quality annotations provided by our dataset.
-              However, in Multiple-Choice QA and Chatbot tasks, GUI-Vid still lags behind industry leaders like
-              GPT-4V and Gemini-Pro, a discrepancy likely due to the baseline LLM’s weaker performance and the
-              challenges of instruction-based fine-tuning.</p>
+              The inconsistency between holistic evaluation results and those at three 
+              fine-grained levels reveals a notable limitation in MLLM-as-a-Judge to 
+              comprehensively assess responses, even when provided with both the user's 
+              instruction and correct golden answer. Specifically, Judge MLLM struggles 
+              to evaluate responses according to fine-grained criteria, such as output structure 
+              (including image count) and the detailed text-image relationships stipulated in the prompt. 
+              Furthermore, our analysis of the results uncovers an inherent bias within MLLM-as-a-Judge, 
+              namely "image-quality bias", where higher scores are consistently awarded to responses 
+              featuring higher-quality image content, despite these responses potentially violating the user's 
+              instructional requirements and judging guidelines. This bias demonstrates that MLLM-as-a-Judge, 
+              even provided with a golden answer, still cannot properly perform accurate assessments on interleaved 
+              responses that adhere to specified requirements.</p>
 
           </div>
         </div>
         <div class="feature_1x1">
 
           <div class="featurecard">
-            <h2>Upper Bound of GUI-oriented Capability with More Keyframes and High Resolution</h2>
+            <h2>Enhanced components bring improvement to general response quality.</h2>
           </div>
           <div class="description">
             <p>
-              Our two ablation studies during the fine-tuning phase demonstrate that utilizing GUI image-text
-              captioning data significantly enhances the model's preliminary understanding of GUI elements,
-              outperforming training that relies solely on videos.
-              Additionally, an increased number of keyframes correlates with improved performance across various
-              scenarios, notably in environments featuring multiple windows and software applications.
-              Further evidence reveals that higher image resolutions substantially boost task performance, both
-              basic and complex, for GPT-4o.
-              These findings underscore the potential for further developing a more robust GUI Agent.</p>
+               The comparative analysis between two image generation models and ablation study on tools 
+               consistently demonstrates superior performance across various task levels when employing enhanced components, 
+               thereby underscoring the importance of advanced tools in producing more accurate and high-fidelity content. 
+               Furthermore, the incorporation of a refinement module significantly contributes to improved text-image alignment, 
+               substantially enhancing both block-level and holistic performance, which highlights the potential for optimizing 
+               individual components to achieve precise interleaved generation within a compositional framework.</p>
 
           </div>
         </div>
@@ -1540,6 +824,88 @@
     </div>
   </section>
 
+  <section class="section" id="Discussion and Future Work">
+    <div class="container is-max-desktop">
+      <div class="featurecard-container">
+        <!-- Trustworthiness and Utility -->
+        <h1 class="title">Discussion and Future Work</h1>
+        <div class="feature_1x1">
+          <div class="featurecard">
+            <h2>Improving Unified Models with Advanced Interleaved Datasets.</h2>
+          </div>
+          <div class="description">
+            <p>
+              Our results highlight the potential of unified autoregressive model structures like Anole and Show-o, 
+              while revealing substantial room for improvement in their instruction following and accurate generation capabilities. 
+              This underscores the need for dedicated interleaved datasets, particularly for vision-dominant tasks. 
+              Current datasets, limited to unimodal tasks or loosely aligned vision-language pairs, inadequately address the challenges of generating coherent interleaved content. 
+              Additionally, existing interleaved datasets are predominantly language-centric, failing to establish robust vision-language dependencies crucial for enhanced multimodal understanding and generation. 
+              In this context, our compositional agent, ISG-AGENT, shows promise as a pipeline for synthetic interleaved instruction tuning and vision-centric data, potentially advancing the development of unified generative models.
+            </p>
+          </div>
+        </div>
+
+        <!-- Alignment of LLMs -->
+        <div class="feature_1x1">
+          <div class="featurecard">
+            <h2>Improving Evaluation Framework for Transparency and Reliability.</h2>
+          </div>
+          <div class="description">
+            <p>
+              Although we have carefully built the whole benchmark from scratch with cross-validation and evaluate the reliability 
+              of these generative models in the question generation and VQA module, 
+              concluding that it's practical to use them as evaluators, the potential trustworthiness problem 
+              of LLMs should be noted as they still make mistakes in evaluation. Moreover, due 
+              to their inherent structure, their evaluation lacks transparent and interpretable results. 
+              Therefore, a future direction lies in reducing the AI models in the evaluation process, like <a href="https://www.task-me-anything.org/">Task Me Anything</a>, 
+              to synthetically generate questions paired with answers to evaluate model performance with highest truthfulness and confidence.
+            </p>
+          </div>
+        </div>
+
+        <!-- Performance Gap in Trustworthiness -->
+        <div class="feature_1x1">
+          <div class="featurecard">
+            <h2>A Flexible and Integrative Compositional Strategy.</h2>
+          </div>
+          <div class="description">
+            <p>
+               In this study, we explore a compositional agent strategy that integrates diverse model modules 
+               to generate interleaved multimodal content. Experimental results indicate that further enhancing 
+               each sub-module's performance may significantly improve the overall generative capabilities. 
+               Consequently, the compositional model not only demonstrates high flexibility and adaptability 
+               but also serves as a pivotal component in the advancement of unified models, particularly by 
+               functioning as a synthetic data pipeline to facilitate interleaved dataset construction. 
+               By leveraging high-quality generated content, this synthetic dataset further augments the generalization 
+               capabilities of unified multimodal models. Thus, its application not only contributes to exploring the 
+               upper-performance bounds of current models but also provides valuable insights and guidance for the 
+               design and optimization of future unified models.
+            </p>
+          </div>
+        </div>
+
+
+        <!-- Transparency in Trustworthiness -->
+        <div class="feature_1x1">
+
+          <div class="featurecard">
+            <h2>Trustworthiness of Interleaved Generation.</h2>
+          </div>
+          <div class="description">
+            <p>
+              While ISG-BENCH provides a strong foundation for evaluating accurate multimodal interleaved generation, 
+              a critical yet underexplored aspect is trustworthiness within these models. However, evaluating trustworthiness 
+              for interleaved generation presents several key challenges: (1) Previous research mainly focuses on single-modality 
+              generative models (e.g., LLMs), while challenges across text-and-image are not well addressed. 
+              (2) Another significant challenge is assessing the robustness of interleaved generation models against adversarial inputs (e.g., jailbreak attacks) or unexpected variations in prompts. 
+              These models may produce misleading or harmful outputs when manipulated through subtle alterations in the input text or images. 
+              Evaluating a model's resistance to such attacks is particularly difficult in a multimodal setting, as an attack could target just one modality (e.g., a slight change in a word or a pixel) and still cause cascading effects on the overall output.</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="section" id="Acknoledgement">
     <div class="container is-max-desktop content">
@@ -1562,7 +928,7 @@
   </section>
   <div class="content">
     <div id="supportContainer">
-      <h1 class="supportTitle">GUI-World Team</h1>
+      <h1 class="supportTitle">Interleaved Scene Graph Team</h1>
       <br>
 
       <div id="logoContainer">
