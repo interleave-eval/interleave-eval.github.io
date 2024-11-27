@@ -182,16 +182,21 @@
       <h2 class="title is-3">Takeaways</h2>
       <div class="content has-text-justified">
         <md-block>
-          In this work, we explore recently released unified models in their interleaved generation capabilities. We introduce a multi-granular automatic evaluation framework for accurate interleaved text-and-image generation, pairing with
-          the first multimodal interleaved benchmark <b>ISG-Bench</b> and a compositional agent framework <b>ISG-Agent</b>:
-          <ol>
-            <li><b>An Automatic Evaluation Framework.</b> We propose an automatic evaluation framework, <b>Interleaved Scene Graph (ISG)</b>, 
-              that assesses interleaved text-and-image generation across four levels—holistic, structure, block, and image—for a comprehensive assessment. </li>
-            <li><b>A New Benchmark.</b> We introduce <b>ISG-Bench</b>, the first benchmark for accurate interleaved generation tasks, 
-              encompassing 21 categories and 1,150 samples, each integrating language-vision dependencies with corresponding golden answers.</li>
-            <li><b>An Interleaved Generative Agent.</b> We introduce <b>ISG-Agent</b>, a unified agent with integrated tool execution, designed to explore the upper bounds of interleaved generation tasks.</li>
-            <li><b>Extensive Evaluation and Implications.</b> We conduct extensive experiments to evaluate current interleaved text-and-image generation models and frameworks, 
-              including our proposed <b>ISG-Agent</b>, providing valuable insights for future research.
+          Many real-world user queries (e.g.~ <i></i>"How do to make egg fried rice?"</i>) could benefit from systems capable of generating responses with both textual steps with accompanying images, similar to a cookbook.
+          Models designed to generate interleaved text and images face challenges in ensuring consistency within and across these modalities.
+          To address these challenges, we present <b>ISG</b>, a comprehensive evaluation framework for interleaved text-and-image generation. 
+          <b>ISG</b> leverages a scene graph structure to capture relationships between text and image blocks, evaluating responses on four levels of granularity: 
+          holistic, structural, block-level, and image-specific. This multi-tiered evaluation allows for a nuanced assessment of consistency, coherence, and accuracy, 
+          and provides interpretable question-answer feedback.
+          In conjunction with <b>ISG</b>, we introduce a benchmark, <b>ISG-Bench</b>, encompassing 1,150 samples across 8 categories and 21 subcategories. 
+          This benchmark dataset includes complex language-vision dependencies and golden answers to evaluate models effectively on vision-centric tasks such as style transfer, 
+          a challenging area for current models. 
+          Using <b>ISG-Bench</b>, we demonstrate that recent unified vision-language models perform poorly on generating interleaved content. 
+          While compositional approaches that combine separate language and image models show a 111% improvement over unified models at the holistic level, 
+          their performance remains suboptimal at both block and image levels.
+          To facilitate future work, we develop <b>ISG-Agent</b>, a baseline agent employing a <i>"plan-execute-refine"</i> pipeline to invoke tools, 
+          achieving a 122% performance improvement.
+
           </ol>
         </md-block>
       </div>
@@ -251,7 +256,7 @@
               visual question answering module to assess image generation quality.</li>
             <li><b>Holistic:</b> Our holistic evaluation uses a multimodal language model as a judge, inputting the query, 
               response, and human-annotated golden answer. This approach, which builds on previous methods, incorporates an 
-              "Analyze-then-Judge" Chain-of-Thought process. The result is a more human-aligned evaluation that assesses generation quality, 
+              <i>"Analyze-then-Judge"</i> Chain-of-Thought process. The result is a more human-aligned evaluation that assesses generation quality, 
               text-image alignment, and overall helpfulness, producing a comprehensive score.</li>
           </ol>
       </div>
@@ -291,7 +296,7 @@
       <!-- Environment Infrastructure. -->
       <h2 class="title is-3">ISG-Agent: The Agent Framework</h2>
       <div class="content has-text-justified">
-        <img src="img/ISG-Bench-2.png" width="100%" alt="ISG-Bench-Overview" class="responsive-image">
+        <img src="img/ISG-Agent.png" width="100%" alt="ISG-Agent-Overview" class="responsive-image">
           ISG-AGENT, our pioneering framework for interleaved text-and-image generation, 
           addresses the challenges faced by unified generation models through a three-component system: 
           (1) Planning, which interprets multimodal queries and generates tool usage plans; 
@@ -901,7 +906,9 @@
     <div class="container is-max-desktop content">
       <h1 class="supportTitle">Acknowledgement</h1>
       <md-block>
-        Many thanks to [Jieyu Zhang](https://jieyuz2.github.io/) for his invalueble effort in this project.
+        This project is a follow-up of <a href="https://arxiv.org/pdf/2402.04788">MLLM-as-a-Judge</a>. 
+        This work is partially funded by Toyota Motor Corporation. 
+        We’d also like to extend a thank you to <a href="https://jieyuz2.github.io/">Jieyu Zhang</a>, <a href="https://weikaih04.github.io/">Weikai Huang</a>, and <a href="https://zixianma.github.io/">Zixian Ma</a> for their insightful feedback and support.
       </md-block>
     </div>
   </section>
